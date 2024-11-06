@@ -1,0 +1,40 @@
+@startuml
+title Topologi Lab Praktikum CR, KHI, KJ
+nwdiag {
+    network inet {
+      CR 
+      KHI
+      KJ
+    }
+    network CR {
+        color = "lightblue" 
+        CR [address = "192.168.10.1/24"];
+        PC_1 [address = "192.168.10.10"];
+    }
+
+    network KHI {
+        KHI [address = "192.168.20.1/24"];
+        PC_2 [address = "192.168.20.10"];
+    }
+
+    network KJ {
+        KJ [address = "192.168.30.1/24"];
+        PC_3 [address = "192.168.30.10"];
+    }
+
+    network Vlan10 {
+        CR [address = "192.168.10.1"];
+        KHI [address = "192.168.20.1"];
+    }
+
+    network Vlan20 {
+        KHI [address = "192.168.20.2"];
+        KJ [address = "192.168.30.1"];
+    }
+
+    network Vlan30 {
+        KJ [address = "192.168.30.2"];
+        CR [address = "192.168.10.2"];
+    }
+}
+@enduml

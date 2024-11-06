@@ -1,0 +1,56 @@
+Topologi ini menggambarkan skema jaringan antara tiga lab kampus: Lab Kampus CR, Lab Kampus KHI, dan Lab Kampus KJ. Masing-masing lab kampus memiliki router yang berfungsi sebagai pengelola LAN lokal mereka, dan komunikasi antar-lab kampus dilakukan menggunakan VLAN dengan koneksi melalui jalur fiber optik.
+
+Jaringan Inet (Koneksi Antar-Lab Kampus)
+network inet mewakili koneksi antar-lab kampus utama yang menghubungkan ketiga lab (Lab CR, Lab KHI, dan Lab KJ). Koneksi ini diasumsikan terhubung melalui jalur fiber optik untuk mendukung transmisi data berkecepatan tinggi dalam komunikasi antar-lab kampus.
+
+Jaringan Lokal Setiap Lab Kampus
+Lab Kampus CR: Didefinisikan sebagai network CR, dengan alamat IP router 192.168.10.1/24. Lab ini memiliki perangkat PC dengan alamat 192.168.10.10.
+Lab Kampus KHI: Didefinisikan sebagai network KHI, dengan alamat IP router 192.168.20.1/24 dan PC di alamat 192.168.20.10.
+Lab Kampus KJ: Didefinisikan sebagai network KJ, dengan alamat IP router 192.168.30.1/24 dan PC di alamat 192.168.30.10.
+Penggunaan VLAN untuk Koneksi Antar-Lab Kampus
+VLAN10: Menghubungkan router di Lab Kampus CR (192.168.10.1) dan Lab Kampus KHI (192.168.20.1), memungkinkan komunikasi langsung antara kedua lab melalui VLAN ini.
+VLAN20: Menghubungkan router di Lab Kampus KHI (192.168.20.2) dan Lab Kampus KJ (192.168.30.1), memungkinkan komunikasi antar Lab Kampus KHI dan Lab Kampus KJ.
+VLAN30: Menghubungkan router di Lab Kampus KJ (192.168.30.2) dan Lab Kampus CR (192.168.10.2), menyediakan konektivitas antara Lab Kampus KJ dan Lab Kampus CR.
+
+
+
+Langkah-Langkah Konfigurasi:
+Masuk ke Router Setiap Lab dengan Winbox
+
+Buka Winbox dan login ke router masing-masing lab (Lab CR, KHI, dan KJ)
+Atur IP Address untuk Setiap Interface
+
+Di Winbox, ke menu IP > Addresses.
+Tambahkan alamat IP sesuai dengan lab masing-masing:
+Lab Kampus CR: IP 192.168.10.1/24
+Lab Kampus KHI: IP 192.168.20.1/24
+Lab Kampus KJ: IP 192.168.30.1/24
+Klik Add (+), masukkan IP Address, pilih interface yang akan digunakan, dan simpan.
+
+Konfigurasi VLAN untuk Koneksi Antar-Lab
+buka menu Interfaces di Winbox.
+Tambahkan VLAN Interface untuk masing-masing VLAN sesuai dengan kebutuhan:
+VLAN10: untuk koneksi Lab Kampus CR dan Lab Kampus KHI
+VLAN20: untuk koneksi Lab Kampus KHI dan Lab Kampus KJ
+VLAN30: untuk koneksi Lab Kampus KJ dan Lab Kampus CR
+Setiap VLAN harus diberikan ID yang unik dan dikaitkan dengan interface fisik yang akan digunakan untuk koneksi antar-lab.
+
+Atur IP Address untuk VLAN
+Masuk ke menu IP > Addresses, dan tambahkan IP untuk masing-masing VLAN interface:
+VLAN10:
+Lab CR: 192.168.10.1
+Lab KHI: 192.168.20.1
+VLAN20:
+Lab KHI: 192.168.20.2
+Lab KJ: 192.168.30.1
+VLAN30:
+Lab KJ: 192.168.30.2
+Lab CR: 192.168.10.2
+
+Konfigurasi Routing Antar-Lab
+
+buka menu IP > Routes 
+klik Add (+) dan tentukan rute sesuai lab kampus
+Testing Koneksi
+
+lakukan ping antar router untuk memastikan koneksi antar-lab berjalan lancar sesuai VLAN yang sudah diatur.
